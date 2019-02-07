@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ApiService} from './api.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'picture-client';
+  images: any;
+  constructor(private api: ApiService) {
+    api.loadImages().subscribe((data) => {
+      this.images = data['results'];
+    });
+  }
 }
